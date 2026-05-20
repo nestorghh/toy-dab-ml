@@ -1,0 +1,54 @@
+# This is a Databricks asset bundle definition for toy_dab_ml.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: toy_dab_ml
+  uuid: 884c02d6-1b0d-405c-8a58-dc948c7b9978
+
+include:
+  - resources/*.yml
+
+artifacts:
+  python_artifact:
+    type: whl
+    build: uv build --wheel
+
+variables:
+  catalog:
+    description: The catalog to use
+  schema:
+    description: The schema to use
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-bce42540-891f.cloud.databricks.com
+    variables:
+      catalog: dev
+      schema: ${workspace.current_user.short_name}
+
+  qa:
+    mode: production
+    workspace:
+      host: https://dbc-056620e6-0941.cloud.databricks.com
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: dev
+      schema: qa
+    permissions:
+      - user_name: caspr.fiu.2@gmail.com
+        level: CAN_MANAGE
+
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-dc083cdb-47c2.cloud.databricks.com
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: dev
+      schema: prod
+    permissions:
+      - user_name: caspr.fiu.2@gmail.com
+        level: CAN_MANAGE
