@@ -13,6 +13,10 @@ jobs:
   validate-dev:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: toy_dab_ml
+
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_DEV_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_DEV_TOKEN }}
@@ -41,4 +45,3 @@ jobs:
       - name: Deploy to dev
         if: github.ref == 'refs/heads/main'
         run: databricks bundle deploy -t dev
-
