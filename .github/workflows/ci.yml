@@ -39,6 +39,12 @@ jobs:
       - name: Sync dependencies
         run: uv sync
 
+      - name: Run Ruff
+        run: uv run ruff check .
+
+      - name: Run mypy
+        run: uv run mypy src
+
       - name: Run tests
         run: uv run pytest
 
