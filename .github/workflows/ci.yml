@@ -39,6 +39,9 @@ jobs:
       - name: Sync dependencies
         run: uv sync
 
+      - name: Run tests
+        run: uv run pytest
+
       - name: Validate Databricks bundle
         run: databricks bundle validate -t dev
 
