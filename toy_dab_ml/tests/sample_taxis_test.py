@@ -1,5 +1,3 @@
-from databricks.sdk.runtime import spark
-from pyspark.sql import DataFrame
 from toy_dab_ml import taxis
 
 

@@ -1,5 +1,5 @@
-from pyspark import pipelines as dp
-from pyspark.sql.functions import col
+from pyspark import pipelines as dp # type: ignore[attr-defined]
+
 
 
 # This file defines a sample transformation.

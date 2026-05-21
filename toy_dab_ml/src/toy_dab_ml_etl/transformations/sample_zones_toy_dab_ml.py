@@ -1,5 +1,5 @@
-from pyspark import pipelines as dp
-from pyspark.sql.functions import col, sum
+from pyspark import pipelines as dp # type: ignore[attr-defined]
+from pyspark.sql.functions import col, sum # type: ignore[attr-defined]
 
 
 # This file defines a sample transformation.
@@ -11,7 +11,7 @@ from pyspark.sql.functions import col, sum
 def sample_zones_toy_dab_ml():
     # Read from the "sample_trips" table, then sum all the fares
     return (
-        spark.read.table(f"sample_trips_toy_dab_ml")
+        spark.read.table("sample_trips_toy_dab_ml")
         .groupBy(col("pickup_zip"))
         .agg(sum("fare_amount").alias("total_fare"))
     )
